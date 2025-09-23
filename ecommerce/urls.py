@@ -35,6 +35,6 @@ urlpatterns = [
     path('cart/', cart, name='cart'),
     path('place-order/', place_order, name='place_order'),
     path('order-complete/', order_complete, name='order_complete'),
-    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/', dashboard, name='dashboard'),    
     path('search-result/', search_result, name='search_result'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
