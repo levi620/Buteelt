@@ -4,7 +4,7 @@ import sqlite3
 # Create your views here.
 def index(request):
     cat = Category.objects.all()
-    prod = Product.objects.all()[:4]
+    prod = Product.objects.all()[:8]
     return render(request , "index.html", {'categories' : cat, 'products' : prod, "count": len(prod)})
 
 
@@ -35,11 +35,18 @@ def search_result(request):
         cursor.execute(query, [f"%{ser}%"])
         rows = cursor.fetchall()
         rows = [Product(*row) for row in rows]
-    return render(request , "search-result.html", {'categories' : cat,'result' : rows, "count": len(rows)})
+    return render(request , "search-result.html", {'result' : rows, "count": len(rows)})
 
 def signin(request):
     return render(request , "signin.html")
-def store(request):
-    cat = Category.objects.all()
-    prod = Product.objects.all()
-    return render(request , "store.html", {'categories' : cat, 'result' : prod, "count": len(prod)})
+def store(request, category_slug=None):
+    categories = None
+    products = None
+    if category_slug != "None":
+        categories = Category.objects.get(slug=category_slug)
+        products = Product.objects.filter(category=categories, is_available=True)
+        product_count = products.count()
+    else:
+        products = Product.objects.all().filter(is_available=True).order_by('id')
+        product_count = products.count()
+    return render(request , "store.html", {'categories' : categories, 'result' : products, "count": product_count})
