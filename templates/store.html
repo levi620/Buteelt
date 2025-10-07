@@ -136,12 +136,16 @@
 			</div> <!-- img-wrap.// -->
 			<figcaption class="info-wrap">
 				<div class="fix-height">
-					<a href="{% url 'product_detail'  %}" class="title">{{i.product_name}}</a>
+					<a href="{{ i.get_url }}" class="title">{{i.product_name}}</a>
 					<div class="price-wrap mt-2">
 						<span class="price">${{i.price}}</span>
 					</div> <!-- price-wrap.// -->
 				</div>
-				<a href="#" class="btn btn-block btn-primary">Add to cart </a>	
+				{%if i.stock != 0%}
+				<a href="#" class="btn btn-block btn-primary">Add to cart </a>
+				{%else%}
+				<a href="#" class="btn btn-block btn-secondary disabled" tabindex="-1" aria-disabled="true">Out of Stock</a>
+				{%endif%}
 			</figcaption>
 		</figure>
 	</div> <!-- col.// -->

@@ -19,11 +19,11 @@
 	<div class="col-md-3">
 		<div class="card card-product-grid">
 			
-			<a href="{% url 'product_detail'  %}" class="img-wrap"> 
+			<a href="{{ i.get_url }}" class="img-wrap"> 
 				<img src="{{i.images.url}}" alt="Just another product name"> 
 			</a>
 			<figcaption class="info-wrap">
-				<a href="{% url 'product_detail'  %}" class="title">{{i.product_name}}</a>
+				<a href="{{ i.get_url }}" class="title">{{i.product_name}}</a>
 				<div class="price mt-1">${{i.price}}</div>
 			</figcaption>
 		</div>
